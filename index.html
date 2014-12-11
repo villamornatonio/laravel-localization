@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Laravel-localization by mcamara</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Laravel-localization</h1>
+          <h2>Easy localization for Laravel 4</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/mcamara/laravel-localization/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/mcamara/laravel-localization/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/mcamara/laravel-localization" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a id="laravel-localization" class="anchor" href="#laravel-localization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Laravel Localization</h1>
+
+<p><a href="https://packagist.org/packages/mcamara/laravel-localization"><img src="https://poser.pugx.org/mcamara/laravel-localization/version.png" alt="Latest Stable Version"></a> <a href="https://packagist.org/packages/mcamara/laravel-localization"><img src="https://poser.pugx.org/mcamara/laravel-localization/d/total.png" alt="Total Downloads"></a> <a href="https://travis-ci.org/mcamara/laravel-localization"><img src="https://travis-ci.org/mcamara/laravel-localization.png" alt="Build Status"></a></p>
+
+<p>Easy i18n localization for Laravel 4, an useful tool to combine with Laravel localization classes.</p>
+
+<h2>
+<a id="table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"><span class="octicon octicon-link"></span></a>Table of Contents</h2>
+
+<ul>
+<li>
+<a href="#installation">Installation</a>
+
+<ul>
+<li><a href="#composer">Composer</a></li>
+<li><a href="#manually">Manually</a></li>
+<li><a href="#laravel-4">Laravel 4</a></li>
+</ul>
+</li>
+<li>
+<a href="#usage">Usage</a>
+
+<ul>
+<li><a href="#filters">Filters</a></li>
+</ul>
+</li>
+<li><a href="#helpers">Helpers</a></li>
+<li><a href="#translated-routes">Translated Routes</a></li>
+<li><a href="#config">Config</a></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<h3>
+<a id="composer" class="anchor" href="#composer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Composer</h3>
+
+<p>Add Laravel Localization to your <code>composer.json</code> file.</p>
+
+<pre><code>"mcamara/laravel-localization": "0.15.*"
+</code></pre>
+
+<p>Run <code>composer install</code> to get the latest version of the package.</p>
+
+<p>If you are using a laravel version lower than 4.2, you should use 0.13.* version. Moreover, 0.15 version will be the last one with support for Laravel 4.2. A new version compatible with Laravel 5 is in development and would be available soon after the final version of Laravel is released, labeled as version 1.x .</p>
+
+<h3>
+<a id="manually" class="anchor" href="#manually" aria-hidden="true"><span class="octicon octicon-link"></span></a>Manually</h3>
+
+<p>It's recommended that you use Composer, however you can download and install from this repository.</p>
+
+<h3>
+<a id="laravel-4" class="anchor" href="#laravel-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Laravel 4</h3>
+
+<p>Laravel Localization comes with a service provider for Laravel 4. You'll need to add it to your <code>composer.json</code> as mentioned in the above steps, then register the service provider with your application.</p>
+
+<p>Open <code>app/config/app.php</code> and find the <code>providers</code> key. Add <code>LaravelLocalizationServiceProvider</code> to the array.</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2">    <span class="pl-k">...</span></span>
+<span class="pl-s2">    <span class="pl-s1"><span class="pl-pds">'</span>Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider<span class="pl-pds">'</span></span></span>
+<span class="pl-s2">    <span class="pl-k">...</span></span></pre></div>
+
+<p>You can also add an alias to the list of class aliases in the same app.php</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2">    <span class="pl-k">...</span></span>
+<span class="pl-s2">    <span class="pl-s1"><span class="pl-pds">'</span>LaravelLocalization<span class="pl-pds">'</span></span>   <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>Mcamara\LaravelLocalization\Facades\LaravelLocalization<span class="pl-pds">'</span></span></span>
+<span class="pl-s2">    <span class="pl-k">...</span></span></pre></div>
+
+<p>To finish, publish the configuration file using the command <code>php artisan config:publish mcamara/laravel-localization</code> in your laravel root path. This will create the following file <code>app/config/packages/mcamara/laravel-localization/config.php</code>, containing the most common setting options.</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Laravel Localization uses the URL given for the request. In order to achieve this purpose, a group should be added into the routes.php file. It will filter all pages that must be localized.</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2">    <span class="pl-c">// app/routes.php</span></span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-s3">Route</span><span class="pl-k">::</span>group(<span class="pl-s3">array</span>(<span class="pl-s1"><span class="pl-pds">'</span>prefix<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">LaravelLocalization</span><span class="pl-k">::</span>setLocale()), <span class="pl-st">function</span>()</span>
+<span class="pl-s2">    {</span>
+<span class="pl-s2">        <span class="pl-c">/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/</span></span>
+<span class="pl-s2">        <span class="pl-s3">Route</span><span class="pl-k">::</span>get(<span class="pl-s1"><span class="pl-pds">'</span>/<span class="pl-pds">'</span></span>, <span class="pl-st">function</span>()</span>
+<span class="pl-s2">        {</span>
+<span class="pl-s2">            <span class="pl-k">return</span> <span class="pl-s3">View</span><span class="pl-k">::</span>make(<span class="pl-s1"><span class="pl-pds">'</span>hello<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2">        });</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">        <span class="pl-s3">Route</span><span class="pl-k">::</span>get(<span class="pl-s1"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span>,<span class="pl-st">function</span>(){</span>
+<span class="pl-s2">            <span class="pl-k">return</span> <span class="pl-s3">View</span><span class="pl-k">::</span>make(<span class="pl-s1"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2">        });</span>
+<span class="pl-s2">    });</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-c">/** OTHER PAGES THAT SHOULD NOT BE LOCALIZED **/</span></span>
+<span class="pl-s2"></span></pre></div>
+
+<p>Once this group is added to the routes file, a user can access all locales added into 'supportedLocales' ('en' and 'es' by default, look at the config section to change that option). For example, a user can now access to two different locales, using the following addresses:</p>
+
+<pre><code>    http://url-to-laravel/en
+    http://url-to-laravel/es
+    http://url-to-laravel
+</code></pre>
+
+<p>If the locale is not present in the url or it is not defined in 'supportedLocales', the system will use the application default locale or the user's browser default locale (if defined in config file).</p>
+
+<p>Once the locale is defined, the locale variable will be stored in a session, so it is not necessary to write the /lang/ section in the url after defining it once, using the last known locale for the user. If the user accesses to a different locale this session value would be changed, translating any other page he visits with the last chosen locale.</p>
+
+<p>Templates files and all locale files should follow the <a href="http://laravel.com/docs/localization">Lang class</a>.</p>
+
+<h3>
+<a id="filters" class="anchor" href="#filters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Filters</h3>
+
+<p>Moreover, this package includes a filter to redirect all "non-localized" routes to a "localized" one (thanks to Sangar82).</p>
+
+<p>So, if a user accesses to http://url-to-laravel/test and the system have this filter active and 'en' as a current locale for this user, it would redirect (301) him automatically to http://url-to-laravel/en/test. This is mainly used to avoid duplicate content and improve SEO performance.</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2">    <span class="pl-c">// app/routes.php</span></span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-s3">Route</span><span class="pl-k">::</span>group(</span>
+<span class="pl-s2">    <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>prefix<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">LaravelLocalization</span><span class="pl-k">::</span>setLocale(),</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>before<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>LaravelLocalizationRedirectFilter<span class="pl-pds">'</span></span> <span class="pl-c">// LaravelLocalization filter</span></span>
+<span class="pl-s2">    ),</span>
+<span class="pl-s2">    <span class="pl-st">function</span>()</span>
+<span class="pl-s2">    {</span>
+<span class="pl-s2">        <span class="pl-c">/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/</span></span>
+<span class="pl-s2">        <span class="pl-s3">Route</span><span class="pl-k">::</span>get(<span class="pl-s1"><span class="pl-pds">'</span>/<span class="pl-pds">'</span></span>, <span class="pl-st">function</span>()</span>
+<span class="pl-s2">        {</span>
+<span class="pl-s2">            <span class="pl-k">return</span> <span class="pl-s3">View</span><span class="pl-k">::</span>make(<span class="pl-s1"><span class="pl-pds">'</span>hello<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2">        });</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">        <span class="pl-s3">Route</span><span class="pl-k">::</span>get(<span class="pl-s1"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span>,<span class="pl-st">function</span>(){</span>
+<span class="pl-s2">            <span class="pl-k">return</span> <span class="pl-s3">View</span><span class="pl-k">::</span>make(<span class="pl-s1"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2">        });</span>
+<span class="pl-s2">    });</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-c">/** OTHER PAGES THAT SHOULD NOT BE LOCALIZED **/</span></span>
+<span class="pl-s2"></span></pre></div>
+
+<p>In order to active it, you just have to attach this filter to the routes you want to be accessible localized.</p>
+
+<p>If you want to hide the default locale but always show other locales in the url, switch the 'hideDefaultLocaleInURL' config value to true. Once it's true, if the default locale is en (english) all URLs containing /en/ would be redirected to the same url without this fragment '/' but maintaining the locale as en (English).</p>
+
+<p><strong>IMPORTANT</strong> - When hideDefaultLocaleInURL is set to true, the unlocalized root is treated as the applications default locale <code>app.locale</code>.  Because of this language negotiation using the Accept-Language header will <strong>NEVER</strong> occur when hideDefaultLocaleInURL is true.</p>
+
+<h2>
+<a id="helpers" class="anchor" href="#helpers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Helpers</h2>
+
+<p>This package comes with some useful functions, like:</p>
+
+<h3>
+<a id="get-url-for-an-specific-locale" class="anchor" href="#get-url-for-an-specific-locale" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get URL for an specific locale</h3>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2">    <span class="pl-c">/**</span></span>
+<span class="pl-s2"><span class="pl-c">     * Returns an URL adapted to $locale</span></span>
+<span class="pl-s2"><span class="pl-c">     *</span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@param</span>  string|boolean   $locale     Locale to adapt, false to remove locale</span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@param</span>  string|false     $url        URL to adapt in the current language. If not passed, the current url would be taken.</span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@param</span>  array            $attributes Attributes to add to the route, if empty, the system would try to extract them from the url.</span></span>
+<span class="pl-s2"><span class="pl-c">     *</span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@throws</span> UnsupportedLocaleException</span></span>
+<span class="pl-s2"><span class="pl-c">     *</span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@return</span> string|false             URL translated, False if url does not exist</span></span>
+<span class="pl-s2"><span class="pl-c">     */</span></span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">getLocalizedURL</span>(<span class="pl-vo">$locale</span> <span class="pl-k">=</span> <span class="pl-c1">null</span>, <span class="pl-vo">$url</span> <span class="pl-k">=</span> <span class="pl-c1">null</span>, <span class="pl-vo">$attributes</span> <span class="pl-k">=</span> <span class="pl-s3">array</span>())</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-c">//Should be called in a view like this:</span></span>
+<span class="pl-s2">    {{ <span class="pl-s3">LaravelLocalization</span><span class="pl-k">::</span>getLocalizedURL(<span class="pl-c1">optional</span> <span class="pl-st">string</span> <span class="pl-vo">$locale</span>, <span class="pl-c1">optional</span> <span class="pl-st">string</span> <span class="pl-vo">$url</span>, <span class="pl-c1">optional</span> <span class="pl-st">array</span> <span class="pl-vo">$attributes</span>) }}</span></pre></div>
+
+<p>It returns a URL localized to the desired locale.</p>
+
+<h3>
+<a id="get-clean-routes" class="anchor" href="#get-clean-routes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get Clean routes</h3>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2">    <span class="pl-c">/**</span></span>
+<span class="pl-s2"><span class="pl-c">     * It returns an URL without locale (if it has it)</span></span>
+<span class="pl-s2"><span class="pl-c">     * Convenience function wrapping getLocalizedURL(false)</span></span>
+<span class="pl-s2"><span class="pl-c">     *</span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@param</span>  string|false     $url      URL to clean, if false, current url would be taken</span></span>
+<span class="pl-s2"><span class="pl-c">     *</span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@return</span> string          URL with no locale in path</span></span>
+<span class="pl-s2"><span class="pl-c">     */</span></span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">getNonLocalizedURL</span>(<span class="pl-vo">$url</span> <span class="pl-k">=</span> <span class="pl-c1">null</span>)</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-c">//Should be called in a view like this:</span></span>
+<span class="pl-s2">    {{ <span class="pl-s3">LaravelLocalization</span><span class="pl-k">::</span>getNonLocalizedURL(<span class="pl-c1">optional</span> <span class="pl-st">string</span> <span class="pl-vo">$url</span>) }}</span></pre></div>
+
+<p>It returns a URL clean of any localization.</p>
+
+<h3>
+<a id="get-url-for-an-specific-translation-key" class="anchor" href="#get-url-for-an-specific-translation-key" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get URL for an specific translation key</h3>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2">    <span class="pl-c">/**</span></span>
+<span class="pl-s2"><span class="pl-c">     * Returns an URL adapted to the route name and the locale given</span></span>
+<span class="pl-s2"><span class="pl-c">     *</span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@throws</span> UnsupportedLocaleException</span></span>
+<span class="pl-s2"><span class="pl-c">     *</span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@param</span>  string|boolean   $locale             Locale to adapt</span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@param</span>  string           $transKeyName       Translation key name of the url to adapt</span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@param</span>  array            $attributes         Attributes for the route (only needed if transKeyName needs them)</span></span>
+<span class="pl-s2"><span class="pl-c">     *</span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@return</span> string|false     URL translated</span></span>
+<span class="pl-s2"><span class="pl-c">     */</span></span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">getURLFromRouteNameTranslated</span>(<span class="pl-vo">$locale</span>, <span class="pl-vo">$transKeyName</span>, <span class="pl-vo">$attributes</span> <span class="pl-k">=</span> <span class="pl-s3">array</span>())</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-c">//Should be called in a view like this:</span></span>
+<span class="pl-s2">    {{ <span class="pl-s3">LaravelLocalization</span><span class="pl-k">::</span>getURLFromRouteNameTranslated(<span class="pl-st">string</span> <span class="pl-vo">$locale</span>, <span class="pl-c1">optional</span> <span class="pl-st">array</span> <span class="pl-vo">$transKeyNames</span>, <span class="pl-c1">optional</span> <span class="pl-st">array</span> <span class="pl-vo">$attributes</span>) }}</span></pre></div>
+
+<p>It returns a route, localized to the desired locale using the locale passed. If the translation key does not exist in the locale given, this function will return false.</p>
+
+<h3>
+<a id="get-supported-locales" class="anchor" href="#get-supported-locales" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get Supported Locales</h3>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2">    <span class="pl-c">/**</span></span>
+<span class="pl-s2"><span class="pl-c">     * Return an array of all supported Locales</span></span>
+<span class="pl-s2"><span class="pl-c">     *</span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@return</span> array</span></span>
+<span class="pl-s2"><span class="pl-c">     */</span></span>
+<span class="pl-s2">     <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">getSupportedLocales</span>()</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-c">//Should be called like this:</span></span>
+<span class="pl-s2">    {{ <span class="pl-s3">LaravelLocalization</span><span class="pl-k">::</span>getSupportedLocales() }}</span></pre></div>
+
+<p>This function will return all supported locales and their properties as an array.</p>
+
+<h3>
+<a id="get-supported-locales-keys" class="anchor" href="#get-supported-locales-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get Supported Locales Keys</h3>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2">    <span class="pl-c">/**</span></span>
+<span class="pl-s2"><span class="pl-c">     * Returns supported languages language key</span></span>
+<span class="pl-s2"><span class="pl-c">     * </span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@return</span> array    keys of supported languages</span></span>
+<span class="pl-s2"><span class="pl-c">     */</span> </span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">getSupportedLanguagesKeys</span>()</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-c">//Should be called like this:</span></span>
+<span class="pl-s2">    {{ <span class="pl-s3">LaravelLocalization</span><span class="pl-k">::</span>getSupportedLanguagesKeys() }}</span></pre></div>
+
+<p>This function will return an array with all the keys for the supported locales.</p>
+
+<h3>
+<a id="set-locale" class="anchor" href="#set-locale" aria-hidden="true"><span class="octicon octicon-link"></span></a>Set Locale</h3>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2">    <span class="pl-c">/**</span></span>
+<span class="pl-s2"><span class="pl-c">     * Set and return current locale</span></span>
+<span class="pl-s2"><span class="pl-c">     *</span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@param</span>  string $locale           Locale to set the App to (optional)</span></span>
+<span class="pl-s2"><span class="pl-c">     *</span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@return</span> string                   Returns locale (if route has any) or null (if route does not have a locale)</span></span>
+<span class="pl-s2"><span class="pl-c">     */</span></span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">setLocale</span>(<span class="pl-vo">$locale</span> <span class="pl-k">=</span> <span class="pl-c1">null</span>)</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-c">//Should be called in a view like this:</span></span>
+<span class="pl-s2">    {{ <span class="pl-s3">LaravelLocalization</span><span class="pl-k">::</span>setLocale(<span class="pl-c1">optional</span> <span class="pl-st">string</span> <span class="pl-vo">$locale</span>) }}</span></pre></div>
+
+<p>This function will change the application's current locale.
+If the locale is not passed, the locale will be determined via a cookie (if stored previously), the session (if stored previously), browser Accept-Language header or the default application locale (depending on your config file).</p>
+
+<p>The function have to be called in the prefix of any route that should be translated (see Filters sections for further information).</p>
+
+<h3>
+<a id="get-current-locale-name" class="anchor" href="#get-current-locale-name" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get Current Locale Name</h3>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2">    <span class="pl-c">/**</span></span>
+<span class="pl-s2"><span class="pl-c">     * Returns current locale name</span></span>
+<span class="pl-s2"><span class="pl-c">     *</span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@return</span> string current locale name</span></span>
+<span class="pl-s2"><span class="pl-c">     */</span></span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">getCurrentLocaleName</span>()</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-c">//Should be called in a view like this:</span></span>
+<span class="pl-s2">    {{ <span class="pl-s3">LaravelLocalization</span><span class="pl-k">::</span>getCurrentLocaleName() }}</span></pre></div>
+
+<p>This function will return current locale name as string (English/Spanish/Arabic/ ..etc).</p>
+
+<h3>
+<a id="get-current-locale-direction" class="anchor" href="#get-current-locale-direction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get Current Locale Direction</h3>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2">    <span class="pl-c">/**</span></span>
+<span class="pl-s2"><span class="pl-c">     * Returns current locale direction</span></span>
+<span class="pl-s2"><span class="pl-c">     *</span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@return</span> string current locale direction</span></span>
+<span class="pl-s2"><span class="pl-c">     */</span></span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">getCurrentLocaleDirection</span>()</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-c">//Should be called in a view like this:</span></span>
+<span class="pl-s2">    {{ <span class="pl-s3">LaravelLocalization</span><span class="pl-k">::</span>getCurrentLocaleDirection() }}</span></pre></div>
+
+<p>This function will return current locale direction as string (ltr/rtl).</p>
+
+<h3>
+<a id="get-current-locale-script" class="anchor" href="#get-current-locale-script" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get Current Locale Script</h3>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2">    <span class="pl-c">/**</span></span>
+<span class="pl-s2"><span class="pl-c">     * Returns current locale script</span></span>
+<span class="pl-s2"><span class="pl-c">     *</span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@return</span> string current locale script</span></span>
+<span class="pl-s2"><span class="pl-c">     */</span></span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">getCurrentLocaleScript</span>()</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-c">//Should be called in a view like this:</span></span>
+<span class="pl-s2">    {{ <span class="pl-s3">LaravelLocalization</span><span class="pl-k">::</span>getCurrentLocaleScript() }}</span></pre></div>
+
+<p>This function will return the <a href="http://www.unicode.org/iso15924">ISO 15924</a> code for the current locale script as a string; "Latn", "Cyrl", "Arab", etc.</p>
+
+<h2>
+<a id="creating-a-language-selector" class="anchor" href="#creating-a-language-selector" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating a language selector</h2>
+
+<p>If you're supporting multiple locales in your project your going to want to provide the users with a way to change language.  Below is a simple example of blade template code you can use to create your own language selector.</p>
+
+<pre><code>&lt;ul class="language_bar_chooser"&gt;
+    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode =&gt; $properties)
+        &lt;li&gt;
+            &lt;a rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode) }}"&gt;
+                {{{ $properties['native'] }}}
+            &lt;/a&gt;
+        &lt;/li&gt;
+    @endforeach
+&lt;/ul&gt;
+</code></pre>
+
+<h2>
+<a id="translated-routes" class="anchor" href="#translated-routes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Translated Routes</h2>
+
+<p>You can adapt your URLs depending on the language you want to show them. For example, http://url/en/about and http://url/es/acerca (acerca is about in spanish) or http://url/en/view/5 and http://url/es/ver/5 (view == ver in spanish) would be redirected to the same controller using the proper filter and setting up the translation files as follows:</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2">    <span class="pl-c">// app/routes.php</span></span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-s3">Route</span><span class="pl-k">::</span>group(</span>
+<span class="pl-s2">    <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>prefix<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">LaravelLocalization</span><span class="pl-k">::</span>setLocale(),</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>before<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>LaravelLocalizationRoutes<span class="pl-pds">'</span></span> <span class="pl-c">// Route translate filter</span></span>
+<span class="pl-s2">    ),</span>
+<span class="pl-s2">    <span class="pl-st">function</span>()</span>
+<span class="pl-s2">    {</span>
+<span class="pl-s2">      <span class="pl-c">/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/</span></span>
+<span class="pl-s2">      <span class="pl-s3">Route</span><span class="pl-k">::</span>get(<span class="pl-s1"><span class="pl-pds">'</span>/<span class="pl-pds">'</span></span>, <span class="pl-st">function</span>()</span>
+<span class="pl-s2">      {</span>
+<span class="pl-s2">        <span class="pl-c">// This routes is useless to translate</span></span>
+<span class="pl-s2">        <span class="pl-k">return</span> <span class="pl-s3">View</span><span class="pl-k">::</span>make(<span class="pl-s1"><span class="pl-pds">'</span>hello<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2">      });</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">      <span class="pl-s3">Route</span><span class="pl-k">::</span>get(<span class="pl-s3">LaravelLocalization</span><span class="pl-k">::</span>transRoute(<span class="pl-s1"><span class="pl-pds">'</span>routes.about<span class="pl-pds">'</span></span>),<span class="pl-st">function</span>(){</span>
+<span class="pl-s2">          <span class="pl-k">return</span> <span class="pl-s3">View</span><span class="pl-k">::</span>make(<span class="pl-s1"><span class="pl-pds">'</span>about<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2">      });</span>
+<span class="pl-s2">      <span class="pl-s3">Route</span><span class="pl-k">::</span>get(<span class="pl-s3">LaravelLocalization</span><span class="pl-k">::</span>transRoute(<span class="pl-s1"><span class="pl-pds">'</span>routes.view<span class="pl-pds">'</span></span>),<span class="pl-st">function</span>(<span class="pl-vo">$id</span>){</span>
+<span class="pl-s2">          <span class="pl-k">return</span> <span class="pl-s3">View</span><span class="pl-k">::</span>make(<span class="pl-s1"><span class="pl-pds">'</span>view<span class="pl-pds">'</span></span>,<span class="pl-s3">array</span>(<span class="pl-s1"><span class="pl-pds">'</span>id<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-vo">$id</span>));</span>
+<span class="pl-s2">      });</span>
+<span class="pl-s2">    });</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-c">/** OTHER PAGES THAT SHOULD NOT BE LOCALIZED **/</span></span></pre></div>
+
+<p>In the routes file you just have to add the <code>LaravelLocalizationRoutes</code> filter and the <code>LaravelLocalization::transRoute</code> function to every route you want to translate using the translation key.</p>
+
+<p><em>Tip:</em> If you want to use this filter with other filters (like <code>LaravelLocalizationRedirectFilter</code>) you just have to join them in the Laravel way, using | (eg: <code>'before' =&gt; 'LaravelLocalizationRoutes|LaravelLocalizationRedirectFilter'</code> )</p>
+
+<p>Then you have to create the translation files and add there every key you want to translate. I suggest you to create a routes.php file inside your app/lang/language_abbreviation folder. For the previous example, I have created two translations files, these two files would look like:</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2">    <span class="pl-c">// app/lang/en/routes.php</span></span>
+<span class="pl-s2">    <span class="pl-k">return</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">      <span class="pl-s1"><span class="pl-pds">"</span>about<span class="pl-pds">"</span></span>       <span class="pl-k">=&gt;</span>  <span class="pl-s1"><span class="pl-pds">"</span>about<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s2">      <span class="pl-s1"><span class="pl-pds">"</span>view<span class="pl-pds">"</span></span>        <span class="pl-k">=&gt;</span>  <span class="pl-s1"><span class="pl-pds">"</span>view/{id}<span class="pl-pds">"</span></span>, <span class="pl-c">//we add a route parameter</span></span>
+<span class="pl-s2">      <span class="pl-c">// other translated routes</span></span>
+<span class="pl-s2">    );</span></pre></div>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2">    <span class="pl-c">// app/lang/es/routes.php</span></span>
+<span class="pl-s2">    <span class="pl-k">return</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">      <span class="pl-s1"><span class="pl-pds">"</span>about<span class="pl-pds">"</span></span>       <span class="pl-k">=&gt;</span>  <span class="pl-s1"><span class="pl-pds">"</span>acerca<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s2">      <span class="pl-s1"><span class="pl-pds">"</span>view<span class="pl-pds">"</span></span>        <span class="pl-k">=&gt;</span>  <span class="pl-s1"><span class="pl-pds">"</span>ver/{id}<span class="pl-pds">"</span></span>, <span class="pl-c">//we add a route parameter</span></span>
+<span class="pl-s2">      <span class="pl-c">// other translated routes</span></span>
+<span class="pl-s2">    );</span></pre></div>
+
+<p>Once files are saved, you can access to http://url/en/about , http://url/es/acerca , http://url/en/view/5 and http://url/es/ver/5 without any problem. The getLanguageBar function would work as desired and it will translate the routes to all translated languages (don't forget to add any new route to the translation file).</p>
+
+<h2>
+<a id="events" class="anchor" href="#events" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events</h2>
+
+<p>You can capture the URL parameters during translation if you wish to translate them too. To do so, just create an event listener for the <code>routes.translation</code> event like so :</p>
+
+<pre><code>Event::listen('routes.translation', function($locale, $attributes)
+{
+    // Do your magic
+
+    return $attributes;
+});
+</code></pre>
+
+<p>Be sure to pass the locale and the attributes as parameters for your closure. You can also use Event Subscribers, see : <a href="http://laravel.com/docs/events#event-subscribers">http://laravel.com/docs/events#event-subscribers</a></p>
+
+<h2>
+<a id="config" class="anchor" href="#config" aria-hidden="true"><span class="octicon octicon-link"></span></a>Config</h2>
+
+<p>By default only english and spanish are allowed but it can be changed using config.php file that is located at <code>app/config/packages/mcamara/laravel-localization/config.php</code> . If this file does not exist, use the following artisan command <code>php artisan config:publish mcamara/laravel-localization</code>  in order to create it.</p>
+
+<p>This file have some interesting configuration settings (as the allowed locales or browser language detection, among others) feel free to play with it, all variables are self-explained.</p>
+
+<h2>
+<a id="changelog" class="anchor" href="#changelog" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changelog</h2>
+
+<p>View changelog here -&gt; <a href="CHANGELOG.md">changelog</a></p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Laravel Localization is an open-sourced laravel package licensed under the MIT license</p>
+        </section>
+
+        <footer>
+          Laravel-localization is maintained by <a href="https://github.com/mcamara">mcamara</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+                  <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-57558462-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+      </div>
+    </div>
+  </body>
+</html>
