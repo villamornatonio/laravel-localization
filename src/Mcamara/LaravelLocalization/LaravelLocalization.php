@@ -1216,5 +1216,30 @@ class LaravelLocalization
 		return $this->getCurrentLocale();
 	}
 
+			/**
+	 * Returns an Array of Current Language Set
+	 *
+	 * @return string current language
+	 */
+	public function getCurrentSetLocale()
+	{
+		return $this->supportedLocales[$this->getCurrentLocale()];
+	}
+
+	/**
+	 * Returns a Boolean Current Language is Set
+	 *
+	 * @return boolean
+	 */
+	public function isLocaleSet()
+	{
+		$response = true;
+		if(!$this->currentLocale){
+			$response = false;
+		}
+		return $response;
+	}
+
+
 
 }
