@@ -780,7 +780,7 @@ class LaravelLocalization {
         return $this->configRepository->get('laravel-localization::hideDefaultLocaleInURL');
     }
 
-<<<<<<< HEAD
+
 			/**
 	 * Returns an Array of Current Language Set
 	 *
@@ -806,7 +806,6 @@ class LaravelLocalization {
 	}
 
 
-=======
     /**
      * Create an url from the uri
      * @param    string $uri Uri
@@ -978,6 +977,6 @@ class LaravelLocalization {
 
         return $url;
     }
->>>>>>> f0750a455a77b24e1e37e01e37c581756eca8a31
+
 
 }
