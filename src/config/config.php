@@ -289,7 +289,7 @@ return array(
 		//'tzm'         => array('name' => 'Central Atlas Tamazight (Tifinagh)','script' => 'Tfng', 'dir' => 'rtl', 'native' => 'ⵜⴰⵎⴰⵣⵉⵖⵜ'),
 		//'yue'         => array('name' => 'Yue',                    'script' => 'Hant', 'dir' => 'ltr', 'native' => '廣州話'),
 		//'ja'          => array('name' => 'Japanese',               'script' => 'Jpan', 'dir' => 'ltr', 'native' => '日本語'),
-		'cn'          => array('img' => 'China.png','name' => 'Chinese (Simplified)',   'script' => 'Hans', 'dir' => 'ltr', 'native' => 'Simplified Chinese'),
+		'zh'          => array('img' => 'China.png','name' => 'Chinese (Simplified)',   'script' => 'Hans', 'dir' => 'ltr', 'native' => 'Simplified Chinese'),
 		//'zh-Hant'     => array('name' => 'Chinese (Traditional)',  'script' => 'Hant', 'dir' => 'ltr', 'native' => '繁體中文'),
 		//'ii'          => array('name' => 'Sichuan Yi',             'script' => 'Yiii', 'dir' => 'ltr', 'native' => 'ꆈꌠꉙ'),
 		//'vai'         => array('name' => 'Vai (Vai)',              'script' => 'Vaii', 'dir' => 'ltr', 'native' => 'ꕙꔤ'),
